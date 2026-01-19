@@ -1,21 +1,28 @@
-// ==UserScript==
-// @name= Game Request Delayer
-// @desc= Delay game requests by 200ms | Updated: 2024-12-20
-// @author= Mohamed2913h
-// @version= 1.1.0
-// @icon= https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/source/avatar.jpg
-// @homepage= https://github.com/Mohamed2913h/game-delayer-plugin
-// ==/UserScript==
+#!name= Game Delayer
+#!desc= Delay game requests by 200ms
+#!icon= gamecontroller
+#!author= Mohamed2913h
+#!homepage= https://github.com/Mohamed2913h/game-delayer-plugin
 
-[Script]
-# Main delay script
-game-delay-engine = type=http-request,pattern=^https?://,script-path=https://raw.githubusercontent.com/Mohamed2913h/game-delayer-plugin/main/delay-processor.js,requires-body=true,timeout=30
+[Rewrite]
+# Rule 1: Delay PUBG Mobile
+^https?:\/\/.*\.pubg\.com.* - delay=200
 
-# Panel display script  
-game-panel = script-path=https://raw.githubusercontent.com/Mohamed2913h/game-delayer-plugin/main/control-panel.js,type=panel
+# Rule 2: Delay Free Fire  
+^https?:\/\/.*\.garena\.com.* - delay=200
+
+# Rule 3: Delay COD Mobile
+^https?:\/\/.*\.activision\.com.* - delay=200
+
+# Rule 4: Delay Mobile Legends
+^https?:\/\/.*\.mobilelegends\.com.* - delay=200
+
+# Rule 5: Delay other games (catch-all)
+^https?:\/\/.*(game|gaming|play)\.com.* - delay=200
 
 [MITM]
-hostname = *
+hostname = %APPEND% *.pubg.com, *.garena.com, *.activision.com, *.mobilelegends.com, *.supercell.com
 
-[Panel]
-Game Delayer = script-name=game-panel,update-interval=5
+[Script]
+# Statistics panel
+game-stats = type=panel,script-path=https://raw.githubusercontent.com/Mohamed2913h/game-delayer-plugin/main/game-stats.js
