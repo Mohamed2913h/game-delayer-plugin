@@ -1,28 +1,43 @@
 #!name= Game Delayer
-#!desc= Delay game requests by 200ms
-#!icon= gamecontroller
+#!desc= Delay game requests by 200ms | Updated: 2024-12-20
+#!openUrl= https://github.com/Mohamed2913h/game-delayer-plugin
 #!author= Mohamed2913h
 #!homepage= https://github.com/Mohamed2913h/game-delayer-plugin
+#!icon= https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/source/avatar.jpg
+#!delay= 200
+#!mitm= 15
+#!total= 20
 
 [Rewrite]
-# Rule 1: Delay PUBG Mobile
-^https?:\/\/.*\.pubg\.com.* - delay=200
+# PUBG Mobile
+^https?:\/\/.*\.pubg\.com\/.* - delay-request=200
 
-# Rule 2: Delay Free Fire  
-^https?:\/\/.*\.garena\.com.* - delay=200
+# Free Fire
+^https?:\/\/.*\.garena\.com\/.* - delay-request=200
 
-# Rule 3: Delay COD Mobile
-^https?:\/\/.*\.activision\.com.* - delay=200
+# Call of Duty Mobile
+^https?:\/\/.*\.activision\.com\/.* - delay-request=200
 
-# Rule 4: Delay Mobile Legends
-^https?:\/\/.*\.mobilelegends\.com.* - delay=200
+# Mobile Legends
+^https?:\/\/.*\.mobilelegends\.com\/.* - delay-request=200
 
-# Rule 5: Delay other games (catch-all)
-^https?:\/\/.*(game|gaming|play)\.com.* - delay=200
+# Clash of Clans/Royale
+^https?:\/\/.*\.supercell\.com\/.* - delay-request=200
+
+# Genshin Impact
+^https?:\/\/.*\.(mihoyo|hoyoverse)\.com\/.* - delay-request=200
+
+# Roblox
+^https?:\/\/.*\.roblox\.com\/.* - delay-request=200
+
+# Fortnite
+^https?:\/\/.*\.epicgames\.com\/.* - delay-request=200
+
+# Steam Games
+^https?:\/\/.*\.steam(powered)?\.com\/.* - delay-request=200
+
+# General Game APIs
+^https?:\/\/.*\/api\/.*game.* - delay-request=200
 
 [MITM]
-hostname = %APPEND% *.pubg.com, *.garena.com, *.activision.com, *.mobilelegends.com, *.supercell.com
-
-[Script]
-# Statistics panel
-game-stats = type=panel,script-path=https://raw.githubusercontent.com/Mohamed2913h/game-delayer-plugin/main/game-stats.js
+hostname = *.pubg.com, *.garena.com, *.activision.com, *.mobilelegends.com, *.supercell.com, *.mihoyo.com, *.hoyoverse.com, *.roblox.com, *.epicgames.com, *.steam.com, *.steampowered.com, %APPEND%
